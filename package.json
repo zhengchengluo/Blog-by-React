@@ -62,7 +62,9 @@
   },
   "dependencies": {
     "core-js": "^2.0.0",
+    "fetch": "^1.1.0",
     "json-loader": "^0.5.4",
+    "marked": "^0.3.6",
     "normalize.css": "^4.0.0",
     "react": "^15.0.0",
     "react-dom": "^15.0.0",
