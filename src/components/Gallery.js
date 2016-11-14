@@ -9,7 +9,7 @@ function getArrangeRandom(low,high) {
 }
 
 function get30DegRandom() {
-	return Math.ceil(Math.random() * 30);
+	return ((Math.random() > 0.5)?'':'-')+Math.ceil(Math.random() * 30);
 }
 class ImgFigure extends React.Component {
 	constructor (props) {

@@ -2,6 +2,8 @@
 body {
   color: #fff;
   background: #222;
+  width: 100%;
+  height: 100%;
   height: calc(100vh);
 }
 section,figure {
@@ -23,9 +25,7 @@ section,figure {
   background: #666;
 }
 
-/*
-*gallery start
-*/
+/*gallery -- start*/
 .gallery {
   position: relative;
   width: 100%;
@@ -33,9 +33,14 @@ section,figure {
   overflow: hidden;
   background-color: #ddd; 
   perspective: 1800px;
+  -webkit-perspective: 1800px;
+  -ms-perspective: 1800px;
+  -moz-perspective: 1800px;
+  -o-perspective: 1800px;
 }
 .gallery .img-figure {
   position: absolute;
+  margin: 0;
   padding: 10px;
   width: 220px;
   height: 280px;
@@ -62,10 +67,10 @@ figcaption {
   text-align: center;
 }
 figcaption .img-title {
-
+  margin-top: 10px;
 }
 figcaption .img-back {
-  /*position: absolute;*/
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
@@ -78,6 +83,7 @@ figcaption .img-back {
   box-sizing: border-box;
   backface-visibility: inherit;
 }
-/*
-*gallery end
-*/
+figcaption .img-back p {
+  margin: 0;
+}
+/*gallery -- end*/
