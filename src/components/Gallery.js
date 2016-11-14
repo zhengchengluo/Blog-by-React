@@ -48,7 +48,7 @@ class ImgFigure extends React.Component {
 		}
 		let imgFigureClass = 'img-figure';
 		imgFigureClass += this.props.arrange.isInverse ? ' is-inverse':'';
-		console.log(this.props.arrange.rotate)
+		
 		return (
 				<figure className={imgFigureClass} style={styleObj} onClick={this.handleClick}>
 					<img src={this.props.data.imgURL} alt={this.props.data.title}/>
@@ -191,7 +191,6 @@ class GalleryComponent extends React.Component {
 			let imgsArrangeArr = this.state.imgsArrangeArr;
 
 			imgsArrangeArr[index].isInverse = !imgsArrangeArr[index].isInverse;
-			console.log(imgsArrangeArr)
 			this.setState({
 				imgsArrangeArr: imgsArrangeArr
 			})
@@ -235,7 +234,6 @@ class GalleryComponent extends React.Component {
 		this.Constant.vPosArrange.topY[0] =  - halfImgH;
 		this.Constant.vPosArrange.topY[1] = halfStageH - halfImgH * 3;
 		
-		console.log(this.Constant.vPosArrange.topY)
 		this.rearrange(0);
 	}
 	render () {

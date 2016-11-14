@@ -2,16 +2,20 @@ require('normalize.css/normalize.css');
 require('styles/App.css');
 
 import React from 'react';
+import Gallery from './Gallery';
+import imgsData from '../mocks/gallery.json';
 
-let yeomanImage = require('../images/yeoman.png');
+let imgsDataArr = (function(imgsDataArr){
+	imgsDataArr.forEach((value,index)=> {
+		imgsDataArr[index].imgURL = '../images/' + value.fileName;
+	})
+	return imgsDataArr;
+})(imgsData)
 
 class AppComponent extends React.Component {
   render() {
     return (
-      <div className="index">
-        <img src={yeomanImage} alt="Yeoman Generator" />
-        <div className="notice">Please edit <code>src/components/Main.js</code> to get started!</div>
-      </div>
+      <Gallery data={imgsDataArr}></Gallery>
     );
   }
 }
