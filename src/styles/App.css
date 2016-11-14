@@ -79,9 +79,12 @@ figcaption .img-back {
   overflow: auto;
   text-align: left;
   background-color: #fff;
-  transform: rotate(180deg) translateZ(1px);
+  transform: rotateY(180deg) translateZ(1px);
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden; /* Chrome 和 Safari */
+  -moz-backface-visibility:hidden;  /* Firefox */
+  -ms-backface-visibility:hidden; 
   box-sizing: border-box;
-  backface-visibility: inherit;
 }
 figcaption .img-back p {
   margin: 0;
