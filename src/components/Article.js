@@ -89,10 +89,10 @@ class CommentForm extends React.Component {
 }
 
 class CommentBox extends React.Component {
-	constructor () {
-		super();
+	constructor (props) {
+		super(props);
 		this.state = {
-			data: this.props.data
+			data: this.props.commentData
 		}
 	}
 	handleSubmitCommit (data) {
@@ -121,14 +121,34 @@ class CommentBox extends React.Component {
 	}
 }
 
-class CommentPage extends React.Component {
+/*
+*文章详情组件
+*/
+class ArticleBox extends React.Component {
+	render () {
+		
+		return (
+			<div className='article-box'>
+				<h1></h1>
+				<div className='article-tip'>
+					<span>作者:</span>
+					<span>时间:</span>
+				</div>
+				<p></p>
+			</div>
+		)
+	}
+}
+class Article extends React.Component {
 	constructor () {
 		super();
-		this.state = ({
+		this.state = {
 			data: []
-		})
+		}
 	}
 	componentDidMount () {
+		//原生fetch接口，只有chrome和Firefox支持
+		//获取评论数据，评论与文章详情在一个数据结构？那分页怎么处理
 		fetch('./mocks/comment.json')
 			.then( response => {
 				if (response.ok) {
@@ -146,8 +166,11 @@ class CommentPage extends React.Component {
 	}
 	render () {
 		return (
-			<CommentBox data={this.state.data} />
+			<section>
+				<ArticleBox articleData={}/>
+				<CommentBox commentData={this.state.data} />
+			</section>
 			)
 	}
 }
-export default CommentPage;
+export default Article;
