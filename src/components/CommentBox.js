@@ -89,10 +89,24 @@ class CommentForm extends React.Component {
 }
 
 class CommentBox extends React.Component {
+	constructor () {
+		super();
+		this.state = {
+			data: this.props.data
+		}
+	}
 	handleSubmitCommit (data) {
 		fetch('api/commit',{
 			method: 'post',
 			body: data
+		}).then(response => {
+			if (response.ok) {
+				return response.json().then(json =>{
+					this.setState({
+						data: this.state.data.concat(json)
+					})
+				})
+			}
 		})
 	}
 	render () {
@@ -100,7 +114,7 @@ class CommentBox extends React.Component {
 			<div className='comment-box'>
 				I am comment-box
 				<h1>Comment</h1>
-				<CommentList data={this.props.data}/>
+				<CommentList data={this.state.data}/>
 				<CommentForm onSubmitCommit={this.handleSubmitCommit}/>
 			</div>
 			)
@@ -132,7 +146,7 @@ class CommentPage extends React.Component {
 	}
 	render () {
 		return (
-			<CommentBox url={this.props.postUrl} data={this.state.data} />
+			<CommentBox data={this.state.data} />
 			)
 	}
 }

@@ -42,8 +42,5 @@ config.module.loaders.push({
   test: /\.json$/,
   loader: 'json-loader'
 });
-config.module.loaders.push({
-  test: /\.(png|jpg|woff|woff2|eot|ttf|svg)$/,
-  loader: 'url-loader?limit=8195'
-});
+
 module.exports = config;
