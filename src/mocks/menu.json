@@ -1,0 +1,39 @@
+{
+	"module":"React",
+	"courses": [
+		{
+			"courseName":"React教程",
+			"articles":[
+				{
+					"title": "React 简介",
+					"id":"1"
+				},
+				{
+					"title": "React api介绍",
+					"id":"2"
+				},
+				{
+					"title": "React 组件案例",
+					"id":"3"
+				},
+				{
+					"title": "React 技巧",
+					"id":"4"
+				}
+			]
+		},
+		{
+			"courseName":"React 最佳实践",
+			"articles":[
+				{
+					"title": "redux",
+					"id":"1"
+				},
+				{
+					"title": "flux",
+					"id":"2"
+				}
+			]
+		}
+	]
+}

@@ -1,11 +1,12 @@
 require('normalize.css/normalize.css');
 require('styles/App.css');
 
-import React from 'react';
+import React,{PropTypes} from 'react';
 import ReactDOM from 'react-dom';
 import marked from 'marked';
-// import fetch from 'fetch';
-
+import AsideMenu from './AsideMenu';
+import ajax from '../utils/ajax';
+import menuDataObj from '../mocks/menu.json';
 
 class Comment extends React.Component {
 	rawMarkup () {
@@ -26,6 +27,7 @@ class Comment extends React.Component {
 
 class CommentList extends React.Component {
 	render () {
+		console.log(this.props.data)
 		let commentNodes = this.props.data.map((value,key) => {
 			return <Comment author={value.author} key={value.id}>{value.text}</Comment>
 		})
@@ -94,6 +96,7 @@ class CommentBox extends React.Component {
 		this.state = {
 			data: this.props.commentData
 		}
+		console.log(this.props.commentData)
 	}
 	handleSubmitCommit (data) {
 		fetch('api/commit',{
@@ -125,16 +128,16 @@ class CommentBox extends React.Component {
 *文章详情组件
 */
 class ArticleBox extends React.Component {
-	render () {
-		
+	render () {		
+		// console.log(this.props.articleData)
 		return (
 			<div className='article-box'>
-				<h1></h1>
+				<h1>{this.props.articleData.title}</h1>
 				<div className='article-tip'>
-					<span>作者:</span>
-					<span>时间:</span>
+					<span>作者:{this.props.articleData.writer}</span>
+					<span>时间:{this.props.articleData.time}</span>
 				</div>
-				<p></p>
+				<p>{this.props.articleData.content}</p>
 			</div>
 		)
 	}
@@ -143,13 +146,27 @@ class Article extends React.Component {
 	constructor () {
 		super();
 		this.state = {
-			data: []
+			data: {
+				article: {					
+					title: '',
+					writer: '',
+					time:'',
+					content: ''
+				},
+				comments: []
+			}
 		}
+	}
+	static propTypes = {
+		getArticleUrl: PropTypes.string
+	}
+	static defaultProps = {
+		getArticleUrl: '/api/getArticle/'
 	}
 	componentDidMount () {
 		//原生fetch接口，只有chrome和Firefox支持
 		//获取评论数据，评论与文章详情在一个数据结构？那分页怎么处理
-		fetch('./mocks/comment.json')
+		fetch('./mocks/article.json')
 			.then( response => {
 				if (response.ok) {
 					return response.json().then(json => {
@@ -164,11 +181,25 @@ class Article extends React.Component {
 				console.log(err)
 			})
 	}
+	getArticle (id) {
+		return () => {
+			ajax({
+				url: this.props.getArticleUrl + '?id=' + id,
+				method: 'get',
+				done: (data) => {
+					this.setState({
+						data: JSON.parse(data)
+					})
+				}
+			})
+		}
+	}
 	render () {
 		return (
 			<section>
-				<ArticleBox articleData={}/>
-				<CommentBox commentData={this.state.data} />
+				<AsideMenu getArticle={this.getArticle} menuData={menuDataObj}/>
+				<ArticleBox articleData={this.state.data.article}/>
+				<CommentBox commentData={this.state.data.comments} />
 			</section>
 			)
 	}

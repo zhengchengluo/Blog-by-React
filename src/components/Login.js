@@ -36,7 +36,7 @@ class LoginComponent extends React.Component {
 			headers: {
 	   			"Content-Type": "application/x-www-form-urlencoded"
   			},
-			body: data
+			body: 'name=' + name + '&password=' + password
 		}).then(response => {
 			if (response.ok) {
 				// return response.json().then(json =>{
